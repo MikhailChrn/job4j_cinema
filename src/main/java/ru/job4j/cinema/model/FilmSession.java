@@ -42,6 +42,20 @@ public class FilmSession {
         this.price = price;
     }
 
+    public FilmSession(int id,
+                       int filmId,
+                       int hallsId,
+                       LocalDateTime startTime,
+                       LocalDateTime endTime,
+                       int price) {
+        this.id = id;
+        this.filmId = filmId;
+        this.hallsId = hallsId;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.price = price;
+    }
+
     public int getId() {
         return id;
     }

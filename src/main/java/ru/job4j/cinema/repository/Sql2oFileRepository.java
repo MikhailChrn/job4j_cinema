@@ -6,6 +6,7 @@ import org.sql2o.Query;
 import org.sql2o.Sql2o;
 import ru.job4j.cinema.model.File;
 
+import java.util.Collection;
 import java.util.Optional;
 
 @Repository
@@ -42,11 +43,27 @@ public class Sql2oFileRepository implements FileRepository {
     }
 
     @Override
-    public void deleteById(int id) {
+    public boolean deleteById(int id) {
+        boolean isDeleted;
         try (Connection connection = sql2o.open()) {
             Query query = connection.createQuery(
-                    "DELETE FROM files WHERE id = :id");
-            query.addParameter("id", id).executeUpdate();
+                    "DELETE FROM files WHERE id = :id"
+            );
+            query.addParameter("id", id);
+            query.executeUpdate();
+            isDeleted = connection.getResult() != 0;
+        }
+        return isDeleted;
+    }
+
+    @Override
+    public Collection<File> findAll() {
+        try (Connection connection = sql2o.open()) {
+            Query query = connection.createQuery(
+                    "SELECT * FROM files"
+            );
+            return query.setColumnMappings(File.COLUMN_MAPPING)
+                    .executeAndFetch(File.class);
         }
     }
 }

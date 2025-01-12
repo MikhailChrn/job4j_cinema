@@ -59,16 +59,16 @@ public class Sql2oFilmRepository implements FilmRepository {
     public Film save(Film film) {
         try (Connection connection = sql2o.open()) {
             String sql = """
-                    INSERT INTO films(name, description, year, genreId,
-                                  minimalAge, duration_in_minutes, file_id)
-                    VALUES (:name, :description, :year, :genre_id,
-                                  :minimal_age, :durationInMinutes, :fileId)
+                    INSERT INTO films(name, description, "year", genre_id,
+                                        minimal_age, duration_in_minutes, file_id)
+                    VALUES (:name, :description, :year, :genreId,
+                                        :minimalAge, :durationInMinutes, :fileId)
                     """;
             Query query = connection.createQuery(sql, true)
                     .addParameter("name", film.getName())
                     .addParameter("description", film.getDescription())
                     .addParameter("year", film.getYear())
-                    .addParameter("genreId", film.getName())
+                    .addParameter("genreId", film.getGenreId())
                     .addParameter("minimalAge", film.getMinimalAge())
                     .addParameter("durationInMinutes", film.getDurationInMinutes())
                     .addParameter("fileId", film.getFileId());
@@ -97,9 +97,9 @@ public class Sql2oFilmRepository implements FilmRepository {
         try (Connection connection = sql2o.open()) {
             String sql = """
                     UPDATE films
-                    SET name = :name, description = :description, year = :year,
-                    genre_id = :genreId, minimal_age = :minimalAge,
-                    duration_in_minutes = :durationInMinutes, file_id = :fileId
+                    SET name = :name, description = :description, "year" = :year,
+                        genre_id = :genreId, minimal_age = :minimalAge,
+                        duration_in_minutes = :durationInMinutes, file_id = :fileId
                     WHERE id = :id
                     """;
             Query query = connection.createQuery(sql)
@@ -107,11 +107,12 @@ public class Sql2oFilmRepository implements FilmRepository {
                     .addParameter("name", film.getName())
                     .addParameter("description", film.getDescription())
                     .addParameter("year", film.getYear())
-                    .addParameter("genreId", film.getName())
+                    .addParameter("genreId", film.getGenreId())
                     .addParameter("minimalAge", film.getMinimalAge())
                     .addParameter("durationInMinutes", film.getDurationInMinutes())
                     .addParameter("fileId", film.getFileId());
             int affectedRows = query.executeUpdate().getResult();
+
             return affectedRows > 0;
         }
     }

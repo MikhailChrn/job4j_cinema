@@ -35,6 +35,22 @@ public class Film {
     public Film() {
     }
 
+    public Film(String name,
+                String description,
+                int year,
+                int genreId,
+                int minimalAge,
+                int durationInMinutes,
+                int fileId) {
+        this.name = name;
+        this.description = description;
+        this.year = year;
+        this.genreId = genreId;
+        this.minimalAge = minimalAge;
+        this.durationInMinutes = durationInMinutes;
+        this.fileId = fileId;
+    }
+
     public int getId() {
         return id;
     }

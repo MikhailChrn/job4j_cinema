@@ -12,4 +12,5 @@ public interface HallRepository {
     Optional<Hall> findByName(String name);
 
     Collection<Hall> findAll();
+
 }

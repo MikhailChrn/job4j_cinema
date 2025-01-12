@@ -12,4 +12,5 @@ public interface GenreRepository {
     Optional<Genre> findByName(String name);
 
     Collection<Genre> findAll();
+
 }

@@ -60,6 +60,7 @@ public class Sql2oFilmSessionRepository implements FilmSessionRepository {
                     .addParameter("price", filmSession.getPrice());
             int generatedId = query.executeUpdate().getKey(Integer.class);
             filmSession.setId(generatedId);
+
             return filmSession;
         }
     }
@@ -96,6 +97,7 @@ public class Sql2oFilmSessionRepository implements FilmSessionRepository {
                     .addParameter("endTime", filmSession.getEndTime())
                     .addParameter("price", filmSession.getPrice());
             int affectedRows = query.executeUpdate().getResult();
+
             return affectedRows > 0;
         }
     }
