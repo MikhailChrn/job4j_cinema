@@ -42,7 +42,7 @@ class Sql2oTicketRepositoryTest {
     @BeforeAll
     public static void initRepositories() throws Exception {
         Properties properties = new Properties();
-        try (InputStream inputStream = Sql2oFilmSessionRepositoryTest.class.getClassLoader()
+        try (InputStream inputStream = Sql2oTicketRepositoryTest.class.getClassLoader()
                 .getResourceAsStream("connection.properties")) {
             properties.load(inputStream);
         }
