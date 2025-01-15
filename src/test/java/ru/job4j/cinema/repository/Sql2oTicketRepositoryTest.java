@@ -58,11 +58,7 @@ class Sql2oTicketRepositoryTest {
         sql2oFilmSessionRepository = new Sql2oFilmSessionRepository(sql2o);
         sql2oFileRepository = new Sql2oFileRepository(sql2o);
 
-        file = sql2oFileRepository.save(
-                new File(7,
-                        "test",
-                        "path_test")
-        );
+        file = sql2oFileRepository.findById(12).get();
 
         sql2oFilmRepository = new Sql2oFilmRepository(sql2o);
 
@@ -89,10 +85,6 @@ class Sql2oTicketRepositoryTest {
 
         sql2oFilmRepository.findAll().forEach(
                 film -> sql2oFilmRepository.deleteById(film.getId())
-        );
-
-        sql2oFileRepository.findAll().forEach(
-                file -> sql2oFileRepository.deleteById(file.getId())
         );
     }
 
