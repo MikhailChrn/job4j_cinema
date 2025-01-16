@@ -14,7 +14,7 @@
             integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V"
             crossorigin="anonymous"></script>
 
-    <title>Список фильмов в прокате</title>
+    <title>Список текущих киносеансов</title>
 </head>
 <body>
 <div class="container-fluid p-0">
@@ -28,19 +28,17 @@
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Название</th>
-                    <th scope="col">Год выпуска</th>
-                    <th scope="col">Жанр</th>
-                    <th scope="col">Длительность</th>
+                    <th scope="col">Начало сеанса</th>
+                    <th scope="col">Зал</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="filmDto: ${filmDtos}">
-                    <td th:text="${filmDto.id}"/>
-                    <td><a th:text="${filmDto.name}"
-                           th:href="@{film/{filmId}(filmId=${filmDto.id})}"></a></td>
-                    <td th:text="${filmDto.year} + ' г.'"/>
-                    <td th:text="${filmDto.genre}"/>
-                    <td th:text="${filmDto.durationInMinutes} + ' мин.'"/>
+                <tr th:each="fsDto: ${filmSessionDtos}">
+                    <td th:text="${fsDto.id}"/>
+                    <td><a th:text="${fsDto.name}"
+                           th:href="@{/movies/booking/{id}(id=${fsDto.id})}"></a></td>
+                    <td th:text="${fsDto.startTime}"/>
+                    <td th:text="${fsDto.hall} + ' зал'"/>
                 </tr>
                 </tbody>
             </table>

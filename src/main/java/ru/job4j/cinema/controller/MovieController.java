@@ -35,7 +35,7 @@ public class MovieController {
         return "movies/all_films";
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/film/{id}")
     public String getFilmById(Model model, @PathVariable int id, HttpSession session) {
         Optional<FilmDto> filmDtoOptional = movieService.findFilmById(id);
         if (filmDtoOptional.isEmpty()) {
@@ -47,6 +47,13 @@ public class MovieController {
         userController.addUserAsAttributeToModel(model, session);
         model.addAttribute("filmDto", filmDtoOptional.get());
         return "movies/film";
+    }
+
+    @GetMapping("/all_sessions")
+    public String getAllSessions(Model model, HttpSession session) {
+        userController.addUserAsAttributeToModel(model, session);
+        model.addAttribute("filmSessionDtos", movieService.findAllSessions());
+        return "movies/all_sessions";
     }
 
     protected void addUserAsAttributeToModel(Model model,

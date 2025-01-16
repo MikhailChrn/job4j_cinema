@@ -13,13 +13,12 @@ import java.util.Collection;
 import java.util.Optional;
 import java.util.Properties;
 
-import static java.util.Collections.emptyList;
 import static java.util.Optional.empty;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 class Sql2oUserRepositoryTest {
 
-    private static Sql2oUserRepository sql2oUserRepository;
+    private static UserRepository sql2oUserRepository;
 
     @BeforeAll
     public static void initRepositories() throws Exception {

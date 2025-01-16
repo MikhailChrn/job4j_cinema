@@ -7,9 +7,7 @@ import ru.job4j.cinema.dto.FilmDto;
 import ru.job4j.cinema.model.File;
 import ru.job4j.cinema.model.Film;
 import ru.job4j.cinema.model.Genre;
-import ru.job4j.cinema.repository.FileRepository;
-import ru.job4j.cinema.repository.FilmRepository;
-import ru.job4j.cinema.repository.GenreRepository;
+import ru.job4j.cinema.repository.*;
 
 
 import java.util.Optional;
@@ -23,16 +21,22 @@ import static org.mockito.Mockito.when;
 class CinemaMovieServiceTest {
 
     private static FilmRepository filmRepository;
+    private static FilmSessionRepository filmSessionRepository;
     private static GenreRepository genreRepository;
+    private static HallRepository hallRepository;
     private static FileRepository fileRepository;
     private static MovieService cinemaMovieService;
 
     @BeforeAll
     public static void initServices() {
         filmRepository = mock(FilmRepository.class);
+        filmSessionRepository = mock(FilmSessionRepository.class);
         genreRepository = mock(GenreRepository.class);
+        hallRepository = mock(HallRepository.class);
         fileRepository = mock(FileRepository.class);
         cinemaMovieService = new CinemaMovieService(filmRepository,
+                filmSessionRepository,
+                hallRepository,
                 genreRepository,
                 fileRepository);
     }
@@ -50,7 +54,7 @@ class CinemaMovieServiceTest {
     }
 
     @Test
-    public void whenGetWhatWeHave() {
+    public void whenGetFilmWhatWeHave() {
         Film originalFilm = new Film("original", "empty",
                 1890, 6, 99, 99999, 7);
         originalFilm.setId(7);
@@ -75,5 +79,12 @@ class CinemaMovieServiceTest {
 
         assertThat(cinemaMovieService.findFilmById(originalFilm.getId()).get())
                 .isEqualTo(filmDto);
+    }
+
+    @Test
+    public void whenGetFilmSessionWhatWeHave() {
+        /**
+         * TODO test fo filmSessionDTO
+         */
     }
 }

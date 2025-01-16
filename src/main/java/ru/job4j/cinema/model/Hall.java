@@ -8,8 +8,8 @@ public class Hall {
     public static final Map<String, String> COLUMN_MAPPING = Map.of(
             "id", "id",
             "name", "name",
-            "row_count", "row_count",
-            "place_count", "place_count",
+            "row_count", "rowCount",
+            "place_count", "placeCount",
             "description", "description"
     );
 
