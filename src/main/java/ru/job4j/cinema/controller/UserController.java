@@ -43,6 +43,7 @@ public class UserController {
 
     @GetMapping("/login")
     public String getLoginPage() {
+
         return "users/login";
     }
 
@@ -58,22 +59,14 @@ public class UserController {
         }
         HttpSession session = request.getSession();
         session.setAttribute("user", userOptional.get());
+
         return "redirect:/index";
     }
 
     @GetMapping("/logout")
     public String logout(HttpSession session) {
         session.invalidate();
-        return "redirect:/users/login";
-    }
 
-    protected void addUserAsAttributeToModel(Model model,
-                                             HttpSession session) {
-        User user = (User) session.getAttribute("user");
-        if (user == null) {
-            user = new User();
-            user.setFullName("Гость");
-        }
-        model.addAttribute("user", user);
+        return "redirect:/users/login";
     }
 }

@@ -68,9 +68,10 @@ class Sql2oTicketRepositoryTest {
 
         sql2oFilmRepository.save(film);
 
-        LocalDateTime startTime = LocalDateTime.of(2024, 1, 20,
+        LocalDateTime startTime = LocalDateTime.of(2025, 1, 20,
                 15, 15);
         LocalDateTime endTime = startTime.plusMinutes(film.getDurationInMinutes());
+
         filmSession = sql2oFilmSessionRepository.save(
                 new FilmSession(7, film.getId(), 3, startTime, endTime, 200));
 

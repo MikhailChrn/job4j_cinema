@@ -11,6 +11,8 @@ public interface TicketRepository {
 
     Collection<Ticket> findAll();
 
+    Collection<Ticket> findBySessionId(int id);
+
     Ticket save(Ticket ticket);
 
     boolean deleteById(int id);

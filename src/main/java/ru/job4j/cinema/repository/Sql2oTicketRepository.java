@@ -7,6 +7,7 @@ import org.sql2o.Sql2o;
 import ru.job4j.cinema.model.Ticket;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -37,6 +38,18 @@ public class Sql2oTicketRepository implements TicketRepository {
             Query query = connection.createQuery(
                     "SELECT * FROM tickets"
             );
+            return query.setColumnMappings(Ticket.COLUMN_MAPPING)
+                    .executeAndFetch(Ticket.class);
+        }
+    }
+
+    @Override
+    public Collection<Ticket> findBySessionId(int id) {
+        try (Connection connection = sql2o.open()) {
+            Query query = connection.createQuery(
+                    "SELECT * FROM tickets WHERE session_id = :sessionId"
+            );
+            query.addParameter("sessionId", id);
             return query.setColumnMappings(Ticket.COLUMN_MAPPING)
                     .executeAndFetch(Ticket.class);
         }

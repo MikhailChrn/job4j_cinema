@@ -87,8 +87,7 @@ public class Ticket {
         return id == ticket.id
                 && sessionId == ticket.sessionId
                 && rowNumber == ticket.rowNumber
-                && placeNumber == ticket.placeNumber
-                && userId == ticket.userId;
+                && placeNumber == ticket.placeNumber;
     }
 
     @Override
@@ -96,7 +95,6 @@ public class Ticket {
         return Objects.hash(id,
                 sessionId,
                 rowNumber,
-                placeNumber,
-                userId);
+                placeNumber);
     }
 }

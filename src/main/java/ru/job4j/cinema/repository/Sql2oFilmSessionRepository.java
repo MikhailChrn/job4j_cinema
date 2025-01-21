@@ -49,12 +49,12 @@ public class Sql2oFilmSessionRepository implements FilmSessionRepository {
             String sql = """
                     INSERT INTO film_sessions(film_id, halls_id,
                                   start_time, end_time, price)
-                    VALUES (:filmId, :hallsId,
+                    VALUES (:filmId, :hallId,
                                   :startTime, :endTime, :price)
                     """;
             Query query = connection.createQuery(sql, true)
                     .addParameter("filmId", filmSession.getFilmId())
-                    .addParameter("hallsId", filmSession.getHallsId())
+                    .addParameter("hallId", filmSession.getHallId())
                     .addParameter("startTime", filmSession.getStartTime())
                     .addParameter("endTime", filmSession.getEndTime())
                     .addParameter("price", filmSession.getPrice());
@@ -84,7 +84,7 @@ public class Sql2oFilmSessionRepository implements FilmSessionRepository {
         try (Connection connection = sql2o.open()) {
             String sql = """
                     UPDATE film_sessions
-                    SET film_id = :filmId, halls_id = :hallsId,
+                    SET film_id = :filmId, hall_id = :hallId,
                     start_time = :startTime, end_time = :endTime,
                     price = :price
                     WHERE id = :id
@@ -92,7 +92,7 @@ public class Sql2oFilmSessionRepository implements FilmSessionRepository {
             Query query = connection.createQuery(sql)
                     .addParameter("id", filmSession.getId())
                     .addParameter("filmId", filmSession.getFilmId())
-                    .addParameter("hallsId", filmSession.getHallsId())
+                    .addParameter("hallId", filmSession.getHallId())
                     .addParameter("startTime", filmSession.getStartTime())
                     .addParameter("endTime", filmSession.getEndTime())
                     .addParameter("price", filmSession.getPrice());

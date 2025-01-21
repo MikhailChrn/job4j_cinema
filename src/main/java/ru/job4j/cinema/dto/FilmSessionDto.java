@@ -1,6 +1,8 @@
 package ru.job4j.cinema.dto;
 
-import java.util.Objects;
+import ru.job4j.cinema.model.Ticket;
+
+import java.util.*;
 
 public class FilmSessionDto {
 
@@ -14,16 +16,23 @@ public class FilmSessionDto {
 
     private int price;
 
+    private int filmId;
+
+    private final List<Ticket> tickets;
+
     public FilmSessionDto(int id,
                           String name,
                           String hall,
                           String startTime,
-                          int price) {
+                          int price,
+                          int filmId) {
         this.id = id;
         this.name = name;
         this.hall = hall;
         this.startTime = startTime;
         this.price = price;
+        this.filmId = filmId;
+        this.tickets = new ArrayList<>();
     }
 
     public int getId() {
@@ -64,6 +73,22 @@ public class FilmSessionDto {
 
     public void setPrice(int price) {
         this.price = price;
+    }
+
+    public int getFilmId() {
+        return filmId;
+    }
+
+    public void setFilmId(int filmId) {
+        this.filmId = filmId;
+    }
+
+    public List<Ticket> getTickets() {
+        return tickets;
+    }
+
+    public void addTicket(Ticket ticket) {
+        tickets.add(ticket);
     }
 
     @Override

@@ -18,24 +18,27 @@ import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-class CinemaMovieServiceTest {
+class FilmServiceImplTest {
 
     private static FilmRepository filmRepository;
     private static FilmSessionRepository filmSessionRepository;
+    private static TicketRepository ticketRepository;
     private static GenreRepository genreRepository;
     private static HallRepository hallRepository;
     private static FileRepository fileRepository;
-    private static MovieService cinemaMovieService;
+    private static FilmService cinemaFilmService;
 
     @BeforeAll
     public static void initServices() {
         filmRepository = mock(FilmRepository.class);
         filmSessionRepository = mock(FilmSessionRepository.class);
+        ticketRepository = mock(TicketRepository.class);
         genreRepository = mock(GenreRepository.class);
         hallRepository = mock(HallRepository.class);
         fileRepository = mock(FileRepository.class);
-        cinemaMovieService = new CinemaMovieService(filmRepository,
+        cinemaFilmService = new FilmServiceImpl(filmRepository,
                 filmSessionRepository,
+                ticketRepository,
                 hallRepository,
                 genreRepository,
                 fileRepository);
@@ -47,9 +50,9 @@ class CinemaMovieServiceTest {
         when(fileRepository.findById(anyInt()))
                 .thenReturn(Optional.empty());
 
-        assertThat(cinemaMovieService.findAllFilms().size())
+        assertThat(cinemaFilmService.findAllFilms().size())
                 .isEqualTo(0);
-        assertThat(cinemaMovieService.findFilmById(0))
+        assertThat(cinemaFilmService.findFilmById(0))
                 .isEqualTo(Optional.empty());
     }
 
@@ -77,7 +80,7 @@ class CinemaMovieServiceTest {
                 fileRepository.findById(originalFilm.getFileId()).get().getPath());
         filmDto.setId(originalFilm.getId());
 
-        assertThat(cinemaMovieService.findFilmById(originalFilm.getId()).get())
+        assertThat(cinemaFilmService.findFilmById(originalFilm.getId()).get())
                 .isEqualTo(filmDto);
     }
 
@@ -87,4 +90,5 @@ class CinemaMovieServiceTest {
          * TODO test fo filmSessionDTO
          */
     }
+
 }
