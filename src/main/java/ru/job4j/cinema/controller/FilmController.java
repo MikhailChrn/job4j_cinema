@@ -31,14 +31,14 @@ public class FilmController {
     @GetMapping("/list")
     public String getAllFilms(Model model, HttpSession session) {
         userService.addUserAsAttributeToModel(model, session);
-        model.addAttribute("filmDtos", filmService.findAllFilms());
+        model.addAttribute("filmDtos", filmService.findAll());
 
         return "/films/list";
     }
 
     @GetMapping("/{id}")
     public String getFilmById(Model model, @PathVariable int id, HttpSession session) {
-        Optional<FilmDto> filmDtoOptional = filmService.findFilmById(id);
+        Optional<FilmDto> filmDtoOptional = filmService.findById(id);
         if (filmDtoOptional.isEmpty()) {
             model.addAttribute("message",
                     "Фильм с указанным идентификатором не найден");

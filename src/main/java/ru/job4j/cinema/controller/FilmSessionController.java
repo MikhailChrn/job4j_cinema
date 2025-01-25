@@ -6,28 +6,28 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import ru.job4j.cinema.service.SessionService;
+import ru.job4j.cinema.service.FilmSessionService;
 import ru.job4j.cinema.service.UserService;
 
 @Controller
-@RequestMapping("/sessions")
+@RequestMapping("/film_sessions")
 @ThreadSafe
-public class SessionController {
+public class FilmSessionController {
 
     private final UserService userService;
 
-    private final SessionService sessionService;
+    private final FilmSessionService filmSessionService;
 
-    public SessionController(UserService userService,
-                             SessionService sessionService) {
+    public FilmSessionController(UserService userService,
+                                 FilmSessionService filmSessionService) {
         this.userService = userService;
-        this.sessionService = sessionService;
+        this.filmSessionService = filmSessionService;
     }
 
     @GetMapping("/list")
     public String getAllSessions(Model model, HttpSession session) {
         userService.addUserAsAttributeToModel(model, session);
-        model.addAttribute("filmSessionDtos", sessionService.findAll());
-        return "/sessions/list";
+        model.addAttribute("filmSessionDtos", filmSessionService.findAll());
+        return "/film_sessions/list";
     }
 }

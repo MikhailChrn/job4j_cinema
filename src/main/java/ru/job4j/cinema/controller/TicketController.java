@@ -20,24 +20,24 @@ public class TicketController {
 
     private final UserService userService;
 
-    private final SessionService sessionService;
+    private final FilmSessionService filmSessionService;
 
     private final TicketService ticketService;
 
     public TicketController(UserService userService,
-                            SessionService sessionService,
+                            FilmSessionService filmSessionService,
                             TicketService ticketService) {
         this.userService = userService;
-        this.sessionService = sessionService;
+        this.filmSessionService = filmSessionService;
         this.ticketService = ticketService;
     }
 
     @GetMapping("/buy_request/{sessionId}")
-    public String getBuyTicketPageById(Model model,
+    public String getBuyTicketsPageBySessionId(Model model,
                                        @PathVariable int sessionId,
                                        HttpSession session) {
 
-        Optional<FilmSessionDto> filmSessionDtoOptional = sessionService.findById(sessionId);
+        Optional<FilmSessionDto> filmSessionDtoOptional = filmSessionService.findById(sessionId);
 
         if (filmSessionDtoOptional.isEmpty()) {
             model.addAttribute("message",
@@ -67,8 +67,8 @@ public class TicketController {
         if (ticketOptional.isEmpty()) {
             model.addAttribute("message",
                     """
-                            Не удалось забронировать выбранное место.
-                            Возможно оно уже занято.
+                            Не удалось забронировать выбранное место.\n
+                            Возможно оно уже занято.\n
                             Попробуйте выбрать другое место.""");
             return "/tickets/buy_fail";
         }

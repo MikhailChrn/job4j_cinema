@@ -20,6 +20,9 @@ public class FilmDto {
 
     private String imagePath;
 
+    public FilmDto() {
+    }
+
     public FilmDto(String name,
                    String description,
                    int year,

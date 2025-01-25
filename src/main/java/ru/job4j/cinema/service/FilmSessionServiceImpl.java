@@ -10,12 +10,14 @@ import ru.job4j.cinema.repository.HallRepository;
 import ru.job4j.cinema.repository.TicketRepository;
 
 import java.util.Collection;
+
+
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
 @Service
-public class SessionServiceImpl implements SessionService {
+public class FilmSessionServiceImpl implements FilmSessionService {
 
     private final HallRepository hallRepository;
 
@@ -25,10 +27,10 @@ public class SessionServiceImpl implements SessionService {
 
     private final TicketRepository ticketRepository;
 
-    public SessionServiceImpl(HallRepository hallRepository,
-                              FilmRepository filmRepository,
-                              FilmSessionRepository filmSessionRepository,
-                              TicketRepository ticketRepository) {
+    public FilmSessionServiceImpl(HallRepository hallRepository,
+                                  FilmRepository filmRepository,
+                                  FilmSessionRepository filmSessionRepository,
+                                  TicketRepository ticketRepository) {
         this.hallRepository = hallRepository;
         this.filmRepository = filmRepository;
         this.filmSessionRepository = filmSessionRepository;
@@ -61,7 +63,12 @@ public class SessionServiceImpl implements SessionService {
 
     @Override
     public Optional<FilmSessionDto> findById(int id) {
-        FilmSession filmSession = filmSessionRepository.findById(id).get();
+        Optional<FilmSession> optFilmSession = filmSessionRepository.findById(id);
+        if (optFilmSession.isEmpty()) {
+            return Optional.empty();
+        }
+
+        FilmSession filmSession = optFilmSession.get();
 
         FilmSessionDto filmSessionDto = new FilmSessionDto(
                 id,

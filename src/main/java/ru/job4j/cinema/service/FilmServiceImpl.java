@@ -11,7 +11,8 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
 @Service
-public class FilmServiceImpl implements FilmService {
+public
+class FilmServiceImpl implements FilmService {
 
     private final FilmRepository filmRepository;
 
@@ -40,7 +41,7 @@ public class FilmServiceImpl implements FilmService {
     }
 
     @Override
-    public Optional<FilmDto> findFilmById(int id) {
+    public Optional<FilmDto> findById(int id) {
         Optional<Film> optionalFilm = filmRepository.findById(id);
         if (optionalFilm.isEmpty()) {
             return Optional.empty();
@@ -57,7 +58,7 @@ public class FilmServiceImpl implements FilmService {
     }
 
     @Override
-    public Collection<FilmDto> findAllFilms() {
+    public Collection<FilmDto> findAll() {
         ConcurrentMap<Integer, FilmDto> filmsDto = new ConcurrentHashMap<>();
         FilmDto filmDto;
         for (Film film : filmRepository.findAll()) {

@@ -20,6 +20,10 @@ public class FilmSessionDto {
 
     private final List<Ticket> tickets;
 
+    public FilmSessionDto() {
+        this.tickets = null;
+    }
+
     public FilmSessionDto(int id,
                           String name,
                           String hall,
