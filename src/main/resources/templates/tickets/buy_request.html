@@ -29,8 +29,8 @@
 
             <input type="hidden" name="sessionId" th:value="${filmSessionDto.id}">
 
-            <h3 th:text="@{${filmSessionDto.name}}"/>
-            <h3 th:text="@{${filmSessionDto.hall}}"/>
+            <h3 th:text="@{${filmSessionDto.filmTitle}}"/>
+            <h3 th:text="@{${filmSessionDto.hallTitle}}"/>
             <h4 th:text="@{Перечень зарезервированных мест}"/>
 
             <table class="table">
@@ -51,6 +51,8 @@
             </table>
 
             <hr>
+
+            <h4 th:text="@{Выберте место}"/>
 
             <div class="mb-3">
                 <label for="rowNumber" class="form-label"><b>Номер ряда</b></label>
@@ -77,9 +79,7 @@
     </div>
 </div>
 
-</div>
-
 <footer th:insert="blocks/footer :: footer"></footer>
-</div>
+
 </body>
 </html>

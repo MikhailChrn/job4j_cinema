@@ -11,6 +11,7 @@ import ru.job4j.cinema.dto.FilmSessionDto;
 import ru.job4j.cinema.model.Ticket;
 import ru.job4j.cinema.model.User;
 import ru.job4j.cinema.service.FilmSessionService;
+import ru.job4j.cinema.service.MyTicketService;
 import ru.job4j.cinema.service.TicketService;
 import ru.job4j.cinema.service.UserService;
 
@@ -33,6 +34,8 @@ class TicketControllerTest {
 
     private TicketService ticketService;
 
+    private MyTicketService myTicketService;
+
     private HttpSession session;
 
     private HttpServletRequest request;
@@ -42,11 +45,13 @@ class TicketControllerTest {
         userService = mock(UserService.class);
         filmSessionService = mock(FilmSessionService.class);
         ticketService = mock(TicketService.class);
+        myTicketService = mock(MyTicketService.class);
         session = mock(HttpSession.class);
         request = mock(HttpServletRequest.class);
         ticketController = new TicketController(userService,
                 filmSessionService,
-                ticketService);
+                ticketService,
+                myTicketService);
     }
 
     @Test

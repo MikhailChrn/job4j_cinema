@@ -1,10 +1,8 @@
 package ru.job4j.cinema.dto;
 
-import ru.job4j.cinema.model.Ticket;
+import java.util.Objects;
 
-import java.util.*;
-
-public class FilmSessionDto {
+public class TicketMyDto {
 
     private int id;
 
@@ -14,25 +12,11 @@ public class FilmSessionDto {
 
     private String startTime;
 
-    private int price;
+    private int rowNumber;
 
-    private final List<Ticket> tickets;
+    private int placeNumber;
 
-    public FilmSessionDto() {
-        this.tickets = null;
-    }
-
-    public FilmSessionDto(int id,
-                          String filmTitle,
-                          String hallTitle,
-                          String startTime,
-                          int price) {
-        this.id = id;
-        this.filmTitle = filmTitle;
-        this.hallTitle = hallTitle;
-        this.startTime = startTime;
-        this.price = price;
-        this.tickets = new ArrayList<>();
+    public TicketMyDto() {
     }
 
     public int getId() {
@@ -67,20 +51,20 @@ public class FilmSessionDto {
         this.startTime = startTime;
     }
 
-    public int getPrice() {
-        return price;
+    public int getRowNumber() {
+        return rowNumber;
     }
 
-    public void setPrice(int price) {
-        this.price = price;
+    public void setRowNumber(int rowNumber) {
+        this.rowNumber = rowNumber;
     }
 
-    public List<Ticket> getTickets() {
-        return tickets;
+    public int getPlaceNumber() {
+        return placeNumber;
     }
 
-    public void addTicket(Ticket ticket) {
-        tickets.add(ticket);
+    public void setPlaceNumber(int placeNumber) {
+        this.placeNumber = placeNumber;
     }
 
     @Override
@@ -88,19 +72,22 @@ public class FilmSessionDto {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        FilmSessionDto that = (FilmSessionDto) o;
+        TicketMyDto that = (TicketMyDto) o;
         return id == that.id
+                && rowNumber == that.rowNumber
+                && placeNumber == that.placeNumber
+                && Objects.equals(filmTitle, that.filmTitle)
                 && Objects.equals(hallTitle, that.hallTitle)
                 && Objects.equals(startTime, that.startTime);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, hallTitle, startTime);
+        return Objects.hash(id,
+                filmTitle,
+                hallTitle,
+                startTime,
+                rowNumber,
+                placeNumber);
     }
 }
-
-
-
-
-

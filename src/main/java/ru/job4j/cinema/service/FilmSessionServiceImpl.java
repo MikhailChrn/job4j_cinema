@@ -51,8 +51,7 @@ public class FilmSessionServiceImpl implements FilmSessionService {
                     filmRepository.findById(filmSession.getFilmId()).get().getName(),
                     hallRepository.findById(filmSession.getHallId()).get().getName(),
                     filmSession.getStartTime().toString(),
-                    filmSession.getPrice(),
-                    filmSession.getFilmId()
+                    filmSession.getPrice()
             );
 
             filmSessionDtos.put(id, filmSessionDto);
@@ -75,8 +74,7 @@ public class FilmSessionServiceImpl implements FilmSessionService {
                 filmRepository.findById(filmSession.getFilmId()).get().getName(),
                 hallRepository.findById(filmSession.getHallId()).get().getName(),
                 filmSession.getStartTime().toString(),
-                filmSession.getPrice(),
-                filmSession.getFilmId()
+                filmSession.getPrice()
         );
 
         addTicketsToFilmSessionDto(filmSessionDto);

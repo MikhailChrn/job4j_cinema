@@ -56,6 +56,18 @@ public class Sql2oTicketRepository implements TicketRepository {
     }
 
     @Override
+    public Collection<Ticket> findByUserId(int id) {
+        try (Connection connection = sql2o.open()) {
+            Query query = connection.createQuery(
+                    "SELECT * FROM tickets WHERE user_id = :userId"
+            );
+            query.addParameter("userId", id);
+            return query.setColumnMappings(Ticket.COLUMN_MAPPING)
+                    .executeAndFetch(Ticket.class);
+        }
+    }
+
+    @Override
     public Ticket save(Ticket ticket) {
         try (Connection connection = sql2o.open()) {
             String sql = """

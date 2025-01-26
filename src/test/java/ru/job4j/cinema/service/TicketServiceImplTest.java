@@ -50,6 +50,6 @@ class TicketServiceImplTest {
 
     @Test
     public void whenFindTicketByIdThenFail() {
-        // TODO
+
     }
 }

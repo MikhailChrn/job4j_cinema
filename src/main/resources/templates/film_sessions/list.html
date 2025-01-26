@@ -35,9 +35,9 @@
                 <tbody>
                 <tr th:each="fsDto: ${filmSessionDtos}">
                     <td th:text="${fsDto.id}"/>
-                    <td><a th:text="${fsDto.name}"
+                    <td><a th:text="${fsDto.filmTitle}"
                            th:href="@{/tickets/buy_request/{id}(id=${fsDto.id})}"></a></td>
-                    <td th:text="${fsDto.hall}"/>
+                    <td th:text="${fsDto.hallTitle}"/>
                     <td th:text="${fsDto.startTime}"/>
                 </tr>
                 </tbody>

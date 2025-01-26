@@ -7,10 +7,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.job4j.cinema.dto.FilmSessionDto;
+import ru.job4j.cinema.dto.TicketMyDto;
 import ru.job4j.cinema.model.Ticket;
 import ru.job4j.cinema.model.User;
 import ru.job4j.cinema.service.*;
 
+import java.util.Collection;
 import java.util.Optional;
 
 @Controller
@@ -24,12 +26,34 @@ public class TicketController {
 
     private final TicketService ticketService;
 
+    private final MyTicketService myTicketService;
+
     public TicketController(UserService userService,
                             FilmSessionService filmSessionService,
-                            TicketService ticketService) {
+                            TicketService ticketService,
+                            MyTicketService myTicketService) {
         this.userService = userService;
         this.filmSessionService = filmSessionService;
         this.ticketService = ticketService;
+        this.myTicketService = myTicketService;
+    }
+
+    @GetMapping("/my_tickets")
+    public String getMyTicketsPageByUserId(Model model,
+                                           HttpServletRequest request) {
+
+        HttpSession session = request.getSession();
+        Optional<User> optionalUser = Optional.of(
+                (User) session.getAttribute("user")
+        );
+
+        Collection<TicketMyDto> ticketMyDtos = myTicketService
+                .findTicketDtosByUserId(optionalUser.get().getId());
+
+        userService.addUserAsAttributeToModel(model, session);
+        model.addAttribute("ticketMyDtos", ticketMyDtos);
+
+        return "/tickets/my_tickets";
     }
 
     @GetMapping("/buy_request/{sessionId}")

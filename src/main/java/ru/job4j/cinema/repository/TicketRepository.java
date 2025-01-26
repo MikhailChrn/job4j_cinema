@@ -13,6 +13,8 @@ public interface TicketRepository {
 
     Collection<Ticket> findBySessionId(int id);
 
+    Collection<Ticket> findByUserId(int id);
+
     Ticket save(Ticket ticket);
 
     boolean deleteById(int id);

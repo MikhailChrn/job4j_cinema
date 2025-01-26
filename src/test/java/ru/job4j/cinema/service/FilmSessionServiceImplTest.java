@@ -79,8 +79,7 @@ class FilmSessionServiceImplTest {
 
         FilmSessionDto expFilmSessionDto = new FilmSessionDto(
                 filmSessionOriginal.getId(), testFilm.getName(), "hall_test",
-                startTime.toString(), filmSessionOriginal.getPrice(),
-                filmSessionOriginal.getFilmId());
+                startTime.toString(), filmSessionOriginal.getPrice());
 
         assertThat(filmSessionService.findById(filmSessionOriginal.getId()))
                 .isEqualTo(Optional.of(expFilmSessionDto));

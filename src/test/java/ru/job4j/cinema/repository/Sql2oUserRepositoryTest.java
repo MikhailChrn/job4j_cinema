@@ -48,7 +48,7 @@ class Sql2oUserRepositoryTest {
 
     @Test
     public void whenDeleteByInvalidIdThenGetFalse() {
-        assertThat(sql2oUserRepository.deleteById(0))
+        assertThat(sql2oUserRepository.deleteById(99))
                 .isFalse();
     }
 
