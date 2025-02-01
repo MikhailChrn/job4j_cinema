@@ -17,7 +17,6 @@ import static java.util.Collections.emptyList;
 import static java.util.Optional.empty;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-@Disabled
 class Sql2oTicketRepositoryTest {
 
     private static Sql2oTicketRepository sql2oTicketRepository;
@@ -25,8 +24,6 @@ class Sql2oTicketRepositoryTest {
     private static Sql2oFilmSessionRepository sql2oFilmSessionRepository;
 
     private static Sql2oFileRepository sql2oFileRepository;
-
-    private static Sql2oUserRepository sql2oUserRepository;
 
     private static File file;
 
@@ -54,11 +51,10 @@ class Sql2oTicketRepositoryTest {
         sql2oTicketRepository = new Sql2oTicketRepository(sql2o);
         sql2oFilmSessionRepository = new Sql2oFilmSessionRepository(sql2o);
         sql2oFileRepository = new Sql2oFileRepository(sql2o);
-        sql2oUserRepository = new Sql2oUserRepository(sql2o);
-
-        file = sql2oFileRepository.findById(12).get();
-
         sql2oFilmRepository = new Sql2oFilmRepository(sql2o);
+
+        file = sql2oFileRepository.save(
+                new File("test", "path-test")).get();
 
         film = new Film("name_test", "description_test",
                 2025, 3, 16, 90, file.getId());
@@ -83,6 +79,10 @@ class Sql2oTicketRepositoryTest {
 
         sql2oFilmRepository.findAll().forEach(
                 film -> sql2oFilmRepository.deleteById(film.getId())
+        );
+
+        sql2oFileRepository.findAll().forEach(
+                file -> sql2oFileRepository.deleteById(file.getId())
         );
     }
 

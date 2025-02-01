@@ -19,6 +19,37 @@ public class Sql2oFileRepository implements FileRepository {
     }
 
     @Override
+    public Optional<File> save(File file) {
+        Optional<File> result = Optional.empty();
+        try (Connection connection = sql2o.open()) {
+            Query query = connection.createQuery(
+                            "INSERT INTO files (name, path) VALUES (:name, :path)",
+                            true)
+                    .addParameter("name", file.getName())
+                    .addParameter("path", file.getPath());
+            int generatedId = query.executeUpdate().getKey(Integer.class);
+            file.setId(generatedId);
+            result = Optional.ofNullable(file);
+        }
+
+        return result;
+    }
+
+    @Override
+    public boolean deleteById(int id) {
+        boolean isDeleted;
+        try (Connection connection = sql2o.open()) {
+            Query query = connection.createQuery(
+                    "DELETE FROM files WHERE id = :id"
+            );
+            query.addParameter("id", id);
+            query.executeUpdate();
+            isDeleted = connection.getResult() != 0;
+        }
+        return isDeleted;
+    }
+
+    @Override
     public Optional<File> findById(int id) {
         try (Connection connection = sql2o.open()) {
             Query query = connection.createQuery(

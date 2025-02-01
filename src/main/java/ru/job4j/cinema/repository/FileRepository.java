@@ -7,6 +7,10 @@ import java.util.Optional;
 
 public interface FileRepository {
 
+    Optional<File> save(File file);
+
+    boolean deleteById(int id);
+
     Optional<File> findById(int id);
 
     Collection<File> findAll();
