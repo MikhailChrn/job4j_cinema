@@ -71,7 +71,7 @@ class UserControllerTest {
         String view = userController.register(model, new User());
         Object actualExceptionMessage = model.getAttribute("message");
 
-        assertThat(view).isEqualTo("errors/404");
+        assertThat(view).isEqualTo("/users/register");
         assertThat(actualExceptionMessage).isEqualTo(expectedMessage);
     }
 

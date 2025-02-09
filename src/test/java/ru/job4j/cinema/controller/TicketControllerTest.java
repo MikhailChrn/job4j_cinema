@@ -40,6 +40,8 @@ class TicketControllerTest {
 
     private HttpServletRequest request;
 
+    private String nextLine = System.lineSeparator();
+
     @BeforeEach
     public void initServices() {
         userService = mock(UserService.class);
@@ -116,10 +118,9 @@ class TicketControllerTest {
         user.setId(9);
 
         String expectedMessage
-                = """
-                Не удалось забронировать выбранное место.\n
-                Возможно оно уже занято.\n
-                Попробуйте выбрать другое место.""";
+                = "Не удалось забронировать выбранное место." + nextLine
+                + "Возможно оно уже занято." + nextLine
+                + "Попробуйте выбрать другое место.";
 
         when(ticketService.addTicket(any())).thenReturn(empty());
         when(request.getSession()).thenReturn(session);

@@ -36,8 +36,10 @@ public class UserController {
         if (savedUser.isEmpty()) {
             model.addAttribute("message",
                     "Пользователь с такой почтой уже существует");
-            return "errors/404";
+
+            return "/users/register";
         }
+
         return "redirect:/index";
     }
 

@@ -28,6 +28,8 @@ public class TicketController {
 
     private final MyTicketService myTicketService;
 
+    private final String nextLine = System.lineSeparator();
+
     public TicketController(UserService userService,
                             FilmSessionService filmSessionService,
                             TicketService ticketService,
@@ -58,8 +60,8 @@ public class TicketController {
 
     @GetMapping("/buy_request/{sessionId}")
     public String getBuyTicketsPageBySessionId(Model model,
-                                       @PathVariable int sessionId,
-                                       HttpSession session) {
+                                               @PathVariable int sessionId,
+                                               HttpSession session) {
 
         Optional<FilmSessionDto> filmSessionDtoOptional = filmSessionService.findById(sessionId);
 
@@ -90,10 +92,10 @@ public class TicketController {
 
         if (ticketOptional.isEmpty()) {
             model.addAttribute("message",
-                    """
-                            Не удалось забронировать выбранное место.\n
-                            Возможно оно уже занято.\n
-                            Попробуйте выбрать другое место.""");
+                    "Не удалось забронировать выбранное место." + nextLine
+                            + "Возможно оно уже занято." + nextLine
+                            + "Попробуйте выбрать другое место.");
+
             return "/tickets/buy_fail";
         }
 
